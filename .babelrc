@@ -1,0 +1,21 @@
+
+{
+  "presets": [
+    [
+      "env",
+      {
+        "targets": {
+          "browsers": [
+            "ie >= 11"
+          ]
+        }
+      }
+    ]
+  ],
+  "plugins": [
+    "lodash",
+    "transform-object-rest-spread",
+    "transform-export-extensions",
+    "transform-class-properties"
+  ]
+}
