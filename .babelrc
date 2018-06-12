@@ -1,17 +1,6 @@
 
 {
-  "presets": [
-    [
-      "env",
-      {
-        "targets": {
-          "browsers": [
-            "ie >= 11"
-          ]
-        }
-      }
-    ]
-  ],
+  "presets": ["env"],
   "plugins": [
     "lodash",
     "transform-object-rest-spread",

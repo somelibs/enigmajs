@@ -21,39 +21,47 @@
   "main": "dist/enigma.js",
   "scripts": {
     "build": "webpack",
-    "dev": "webpack --watch -d",
+    "minify": "NODE_ENV=production npm run build",
+    "analyze": "___WEBPACK_ANALYZE__=true webpack",
+    "watch": "webpack --watch -d",
+    "dev": "npm run watch & npm run lint:watch",
     "lint": "eslint src/** --fix",
     "lint:watch": "nodemon -e js -x 'npm run lint'",
-    "nodemon": "nodemon --watch src -e js -x 'npm run build' --verbose",
     "test": "jest --verbose",
-    "test:watch": "jest --verbose --debug --watchAll"
+    "test:watch": "jest --verbose --debug --watchAll",
+    "postinstall": "npm run build"
   },
   "devDependencies": {
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.0",
-    "babel-eslint": "^7.2.3",
+    "babel-eslint": "^8.2.3",
     "babel-loader": "^7.1.4",
-    "babel-plugin-lodash": "^3.3.3",
+    "babel-plugin-lodash": "^3.3.4",
     "babel-plugin-transform-class-properties": "^6.23.0",
     "babel-plugin-transform-export-extensions": "^6.22.0",
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-preset-env": "^1.6.0",
+    "babel-preset-react": "^6.23.0",
     "eslint": "^4.19.1",
-    "eslint-config-airbnb-base": "^12.1.0",
+    "eslint-config-airbnb": "^16.1.0",
     "eslint-loader": "^2.0.0",
     "eslint-plugin-babel": "^5.1.0",
     "eslint-plugin-import": "^2.12.0",
+    "eslint-plugin-jsx-a11y": "^6.0.3",
+    "eslint-plugin-react": "^7.9.1",
     "jest": "^23.1.0",
     "lodash-webpack-plugin": "^0.11.5",
-    "nodemon": "^1.17.5",
-    "webpack": "^4.10.2",
-    "webpack-cli": "^3.0.1"
+    "webpack": "^4.12.0",
+    "webpack-bundle-analyzer": "^2.13.1",
+    "webpack-cli": "^3.0.3"
+  },
+  "optionalDependencies": {
+    "babel-polyfill": "^6.26.0",
+    "lodash": "^4.17.10"
   },
   "dependencies": {
     "array-buffer-to-hex": "^1.0.0",
-    "babel-polyfill": "^6.26.0",
     "hex-to-array-buffer": "^1.1.0",
-    "lodash": "^4.17.10",
     "random-bytes": "^1.0.0"
   }
 }

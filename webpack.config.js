@@ -1,48 +1,45 @@
+const webpack = require('webpack');
 const path = require('path');
 const LodashModuleReplacementPlugin = require('lodash-webpack-plugin');
+const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 
-const dev = process.env.NODE_ENV !== 'production';
+const __DEV__ = process.env.NODE_ENV !== 'production';
+const ___WEBPACK_ANALYZE__ = process.env.___WEBPACK_ANALYZE__;
 
-const libraryName = 'enigma';
-
-const webpackConfig = {
-  entry: './src/index.js',
-  mode: dev ? 'development' : 'production',
-  output: {
-    path: path.resolve(__dirname, 'dist/'),
-    filename: 'enigma.js',
-    library: libraryName,
-    libraryTarget: 'umd',
-    globalObject: 'this',
-  },
-  module: {
-    rules: [
-      /* { KAWAX issue
-        enforce: 'pre',
-        test: /\.js$/,
-        exclude: /node_modules/,
-        loader: 'eslint-loader',
-        options: {
-          failOnError: true,
-        },
-      },*/
-      {
-        test: /\.js$/,
-        exclude: /(node_modules)/,
-        loader: 'babel-loader',
-      }
+module.exports = __ENV__ => {
+  const webpackConfig = {
+    entry: './src/index.js',
+    mode: __DEV__ ? 'development' : 'production',
+    output: {
+      path: path.resolve(__dirname, 'dist/'),
+      filename: 'enigma.js',
+      library: 'enigma',
+      libraryTarget: 'umd',
+    },
+    module: {
+      rules: [
+        {
+          test: /\.js$/,
+          exclude: /(node_modules)/,
+          loader: 'babel-loader',
+        }
+      ]
+    },
+    node: {
+      net: 'empty',
+      fs: 'empty',
+      tls: 'empty'
+    },
+    plugins: [
+      new webpack.DefinePlugin({
+        __DEV__: (__ENV__ !== 'production')
+      })
     ]
-  },
-  node: {
-    net: 'empty',
-    fs: 'empty',
-    tls: 'empty'
-  },
-  plugins: []
+  };
+
+  if (__DEV__ && ___WEBPACK_ANALYZE__) {
+    webpackConfig.plugins.push(new BundleAnalyzerPlugin());
+  }
+
+  return webpackConfig;
 };
-
-if (!dev) {
-  webpackConfig.plugins.push(new LodashModuleReplacementPlugin());
-}
-
-module.exports = webpackConfig;
