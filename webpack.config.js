@@ -16,6 +16,9 @@ module.exports = __ENV__ => {
       library: 'enigma',
       libraryTarget: 'umd',
     },
+    performance: {
+      hints: false
+    },
     module: {
       rules: [
         {
