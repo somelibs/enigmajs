@@ -16,7 +16,7 @@ const sign = async (payload, { key }) => {
 
 const deriveKey = ({ passphrase, salt }) => SymmetricKey.generate({
   passphrase,
-  salt
+  salt,
 });
 
 const createSecret = () => SymmetricKey.generate();
@@ -32,7 +32,7 @@ const importKey = (jwk) => {
   if (algorithm) {
     if (settings.type === 'symmetric') {
       return SymmetricKey.import(jsonJwk);
-    } else if (settings.type === 'asymmetric') {
+    } if (settings.type === 'asymmetric') {
       return AsymmetricKey.import(jsonJwk);
     }
   }

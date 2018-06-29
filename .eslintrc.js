@@ -35,7 +35,6 @@ module.exports = {
     "consistent-return": "off",
     "arrow-parens": ["error", "always"],
     "no-restricted-syntax": ["off", "ForInStatement"],
-    "comma-dangle": ["warn", "only-multiline"],
     "prefer-destructuring": ["error", {
       AssignmentExpression: {"array": true, "object": true }
     }],

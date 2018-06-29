@@ -29,7 +29,7 @@ function generateCryptoKeyPair(algo, extractable, keyUsages) {
 function generateKey(type, algorithm, extractable, keyUsages) {
   if (type === 'asymmetric') {
     return generateCryptoKeyPair(algorithm, extractable, keyUsages);
-  } else if (type === 'symmetric') {
+  } if (type === 'symmetric') {
     return generateCryptoKey(algorithm, extractable, keyUsages);
   }
 }
@@ -82,4 +82,3 @@ class Subtle {
 
 export default Subtle;
 export { CryptoKey };
-

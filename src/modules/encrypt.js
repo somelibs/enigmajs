@@ -13,13 +13,13 @@ const encrypt = async (payload, { key }) => {
     const ciphertext = await crypto.subtle.encrypt(settings, cryptoKey, buffer);
     return {
       text: arrayBufferToHex(new Uint8Array(ciphertext)),
-      iv: ivString
+      iv: ivString,
     };
-  } else if (key.type === 'asymmetric') {
+  } if (key.type === 'asymmetric') {
     const settings = _.clone(key.getAlgorithm());
     const ciphertext = await crypto.subtle.encrypt(settings, cryptoKey, buffer);
     return {
-      text: arrayBufferToHex(new Uint8Array(ciphertext))
+      text: arrayBufferToHex(new Uint8Array(ciphertext)),
     };
   }
 };
