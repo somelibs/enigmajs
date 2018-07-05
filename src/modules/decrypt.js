@@ -8,7 +8,7 @@ const getCryptoKey = (key) => {
   }
 };
 
-const decrypt = async (cipher = {}, { key }) => {
+const decrypt = async (cipher = {}, { key }, raw = false) => {
   const ciphertext = cipher.text;
   if (ciphertext) {
     const cryptoKey = getCryptoKey(key);
@@ -22,7 +22,7 @@ const decrypt = async (cipher = {}, { key }) => {
       settings = key.getAlgorithm();
     }
     const buffer = await crypto.subtle.decrypt(settings, cryptoKey, cipherBuffer);
-    return arrayBufferToString(buffer);
+    return raw ? buffer : arrayBufferToString(buffer);
   }
   return null;
 };
