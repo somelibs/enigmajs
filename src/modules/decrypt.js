@@ -8,15 +8,15 @@ const getCryptoKey = (key) => {
   }
 };
 
-const decrypt = async (cipher = {}, { key }, raw = false) => {
+const decrypt = async (cipher = {}, { key, raw }) => {
   const ciphertext = cipher.text;
   if (ciphertext) {
     const cryptoKey = getCryptoKey(key);
-    const cipherBuffer = hexToArrayBuffer(ciphertext);
+    const cipherBuffer = _.isArrayBuffer(ciphertext) ? ciphertext : hexToArrayBuffer(ciphertext);
     let settings;
     if (key.type === 'symmetric') {
       const iv = cipher.iv;
-      const ivBuffer = stringToInitVector(iv);
+      const ivBuffer = _.isArrayBuffer(iv) ? iv : stringToInitVector(iv);
       settings = _.extend(key.getAlgorithm(), { iv: ivBuffer });
     } else if (key.type === 'asymmetric') {
       settings = key.getAlgorithm();

@@ -5,13 +5,7 @@ import Random from './Random';
 
 const encrypt = async (payload, { key }) => {
   const cryptoKey = key.toCryptoKey(key);
-  let buffer = null;
-  if (_.isString(payload)) {
-    buffer = stringToArrayBuffer(payload);
-  }
-  if (_.isArrayBuffer(payload)) {
-    buffer = payload;
-  }
+  const buffer = _.isArrayBuffer(payload) ? payload : stringToArrayBuffer(payload);
   if (key.type === 'symmetric') {
     const ivString = await Random.ivString();
     const iv = stringToInitVector(ivString);
