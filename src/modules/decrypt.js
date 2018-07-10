@@ -8,7 +8,7 @@ const getCryptoKey = (key) => {
   }
 };
 
-const decrypt = async (cipher = {}, { key, raw }) => {
+const decrypt = async (cipher = {}, { key, raw = false }) => {
   const ciphertext = cipher.text;
   if (ciphertext) {
     const cryptoKey = getCryptoKey(key);

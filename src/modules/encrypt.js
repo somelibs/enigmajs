@@ -3,7 +3,8 @@ import arrayBufferToHex from 'array-buffer-to-hex';
 import { stringToArrayBuffer, stringToInitVector } from './utils';
 import Random from './Random';
 
-const encrypt = async (payload, { key }) => {
+
+const encrypt = async (payload, { key, raw = false }) => {
   const cryptoKey = key.toCryptoKey(key);
   const buffer = _.isArrayBuffer(payload) ? payload : stringToArrayBuffer(payload);
   if (key.type === 'symmetric') {
@@ -12,14 +13,14 @@ const encrypt = async (payload, { key }) => {
     const settings = _.extend(key.getAlgorithm(), { iv });
     const ciphertext = await crypto.subtle.encrypt(settings, cryptoKey, buffer);
     return {
-      text: arrayBufferToHex(new Uint8Array(ciphertext)),
-      iv: ivString,
+      text: raw ? ciphertext : arrayBufferToHex(ciphertext),
+      iv: raw ? iv : ivString,
     };
   } if (key.type === 'asymmetric') {
     const settings = _.clone(key.getAlgorithm());
     const ciphertext = await crypto.subtle.encrypt(settings, cryptoKey, buffer);
     return {
-      text: arrayBufferToHex(new Uint8Array(ciphertext)),
+      text: raw ? ciphertext : arrayBufferToHex(ciphertext),
     };
   }
 };
