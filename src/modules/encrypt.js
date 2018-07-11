@@ -14,7 +14,7 @@ const encrypt = async (payload, { key, raw = false }) => {
     const ciphertext = await crypto.subtle.encrypt(settings, cryptoKey, buffer);
     return {
       text: raw ? ciphertext : arrayBufferToHex(ciphertext),
-      iv: raw ? iv : ivString,
+      iv: ivString,
     };
   } if (key.type === 'asymmetric') {
     const settings = _.clone(key.getAlgorithm());
