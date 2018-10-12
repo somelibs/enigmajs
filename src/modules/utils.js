@@ -1,41 +1,20 @@
-const stringToArrayBuffer = (string) => {
-  // Chrome and Firefox
-  if ('TextDecoder' in window) {
-    const enc = new TextEncoder();
-    return enc.encode(string);
-  }
-
-  // Edge
-  const strUtf8 = unescape(encodeURIComponent(string));
-  const ab = new Uint8Array(strUtf8.length);
-  for (let i = 0; i < strUtf8.length; i += 1) {
-    ab[i] = strUtf8.charCodeAt(i);
-  }
-  return ab;
-
+const stringToArrayBuffer = (str) => {
+  const stringLength = str.length;
+  const resultBuffer = new ArrayBuffer(stringLength);
+  const resultView = new Uint8Array(resultBuffer);
+  for (let i = 0; i < stringLength; i++) resultView[i] = str.charCodeAt(i);
+  return resultBuffer;
 };
 
-const arrayBufferToString = (arrayBuffer) => {
-  // Chrome and Firefox
-  if ('TextDecoder' in window) {
-    const decoder = new TextDecoder();
-    return decoder.decode(arrayBuffer);
-  }
-
-  // Edge
-  const byteArray = new Uint8Array(arrayBuffer);
-  let byteString = '';
-  for (let i = 0; i < byteArray.byteLength; i += 1) {
-    byteString += String.fromCharCode(byteArray[i]);
-  }
-  return decodeURIComponent(byteString);
-
+const arrayBufferToString = (buffer) => {
+  let resultString = '';
+  const view = new Uint8Array(buffer);
+  for (const element of view) resultString += String.fromCharCode(element);
+  return resultString;
 };
 
 const stringToInitVector = (initVector, appendix = null) => {
-  if (!initVector) {
-    return null;
-  }
+  if (!initVector) return null;
   const ivStrings = initVector.split(',');
   if (appendix != null) {
     if (Array.isArray(appendix)) {
@@ -45,9 +24,7 @@ const stringToInitVector = (initVector, appendix = null) => {
     }
   }
   const iv = new Uint8Array(ivStrings.length);
-  for (let i = 0; i < ivStrings.length; i += 1) {
-    iv[i] = parseInt(ivStrings[i], 10);
-  }
+  for (let i = 0; i < ivStrings.length; i += 1) iv[i] = parseInt(ivStrings[i], 10);
   return iv;
 };
 

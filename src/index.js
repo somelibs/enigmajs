@@ -21,9 +21,9 @@ const deriveKey = ({ passphrase, salt }) => SymmetricKey.generate({
 
 const createSecret = () => SymmetricKey.generate();
 
-const createVerificationKey = () => AsymmetricKey.generate('SIGN_VERIFY');
+const createSignatureKeyPair = () => AsymmetricKey.generate('SIGN_VERIFY');
 
-const createEncryptionKey = () => AsymmetricKey.generate('ENCRYPT_DECRYPT');
+const createEncryptionKeyPair = () => AsymmetricKey.generate('ENCRYPT_DECRYPT');
 
 const importKey = (jwk) => {
   const jsonJwk = _.isString(jwk) ? JSON.parse(jwk) : jwk;
@@ -42,4 +42,4 @@ export encrypt from './modules/encrypt';
 export decrypt from './modules/decrypt';
 export Random from './modules/Random';
 
-export { sign, deriveKey, createSecret, createVerificationKey, createEncryptionKey, importKey };
+export { sign, deriveKey, createSecret, createSignatureKeyPair, createEncryptionKeyPair, importKey };

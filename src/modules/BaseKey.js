@@ -44,7 +44,8 @@ class BaseKey {
       type = 'raw';
       ({ usages } = settings);
     }
-    const { algorithm, extractable } = settings;
+    const extractable = false;
+    const { algorithm } = settings;
     const instance = new this(settings);
     const cryptoKey = await crypto.subtle.importKey(type, keyData, algorithm, extractable, usages);
     instance.setCryptoKey(cryptoKey);

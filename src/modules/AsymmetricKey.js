@@ -12,7 +12,8 @@ class AsymmetricKey extends BaseKey {
     } else if (type === 'ENCRYPT_DECRYPT') {
       settings = Settings.getAlgorithmSettings('RSA-OAEP');
     }
-    const { algorithm, extractable, usages } = settings;
+    const extractable = true;
+    const { algorithm, usages } = settings;
     const publicKey = new AsymmetricKey(settings);
     const privateKey = new AsymmetricKey(settings);
     const keyPair = await crypto.subtle.generateKey(algorithm, extractable, usages);

@@ -4,7 +4,6 @@ class Settings {
     aesGcm: {
       type: 'symmetric',
       usages: ['encrypt', 'decrypt'],
-      extractable: false,
       algorithm: {
         name: 'AES-GCM',
         length: 256,
@@ -16,7 +15,6 @@ class Settings {
     rsaOaep: {
       type: 'asymmetric',
       usages: ['encrypt', 'decrypt'],
-      extractable: false,
       algorithm: {
         name: 'RSA-OAEP',
         modulusLength: 4096,
@@ -27,7 +25,6 @@ class Settings {
     ecdsa: {
       type: 'asymmetric',
       usages: ['sign', 'verify'],
-      extractable: false,
       algorithm: {
         name: 'ECDSA',
         namedCurve: 'P-384',
@@ -37,7 +34,6 @@ class Settings {
     pbkdf2: {
       type: 'derivation',
       usages: ['deriveKey', 'deriveBits'],
-      extractable: false,
       algorithm: {
         name: 'PBKDF2',
         iterations: 800,

@@ -3,9 +3,14 @@ import arrayBufferToHex from 'array-buffer-to-hex';
 import { stringToArrayBuffer, stringToInitVector } from './utils';
 import Random from './Random';
 
+const getCryptoKey = (key) => {
+  if (key && _.isFunction(key.toCryptoKey)) {
+    return key.toCryptoKey();
+  }
+};
 
 const encrypt = async (payload, { key, raw = false }) => {
-  const cryptoKey = key.toCryptoKey(key);
+  const cryptoKey = getCryptoKey(key);
   const buffer = _.isArrayBuffer(payload) ? payload : stringToArrayBuffer(payload);
   if (key.type === 'symmetric') {
     const ivString = await Random.ivString();
