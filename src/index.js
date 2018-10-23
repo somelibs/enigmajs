@@ -42,4 +42,13 @@ export encrypt from './modules/encrypt';
 export decrypt from './modules/decrypt';
 export Random from './modules/Random';
 
-export { sign, deriveKey, createSecret, createSignatureKeyPair, createEncryptionKeyPair, importKey };
+export {
+  sign,
+  deriveKey,
+  createSecret,
+  createSignatureKeyPair,
+  createEncryptionKeyPair,
+  importKey,
+  stringToArrayBuffer,
+  arrayBufferToString
+};

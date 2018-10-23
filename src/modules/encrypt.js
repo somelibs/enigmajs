@@ -12,6 +12,7 @@ const getCryptoKey = (key) => {
 const encrypt = async (payload, { key, raw = false }) => {
   const cryptoKey = getCryptoKey(key);
   const buffer = _.isArrayBuffer(payload) ? payload : stringToArrayBuffer(payload);
+  if (!key) throw Error('undefined key (Enigma.encrypt)');
   if (key.type === 'symmetric') {
     const ivString = await Random.ivString();
     const iv = stringToInitVector(ivString);
