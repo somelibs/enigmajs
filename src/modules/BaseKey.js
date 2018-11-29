@@ -1,9 +1,11 @@
 import _ from 'lodash';
+import uuid from 'uuid';
 import Settings from './Settings';
 
 class BaseKey {
 
   constructor({ type, algorithm } = {}) {
+    this.uuid = uuid();
     this.type = type;
     this.algorithm = algorithm;
   }

@@ -35,7 +35,7 @@
     "dev": "npm run watch & npm run lint:watch",
     "lint": "eslint src tests --fix",
     "lint:watch": "nodemon -e js -x 'npm run lint'",
-    "prepare": "npm run clean && npm run lint && npm run test && npm run build",
+    "prepare": "npm run clean && npm run build",
     "test": "BABEL_ENV=commonjs jest",
     "test:watch": "npm run test -- --watch"
   },
@@ -85,6 +85,7 @@
     "babel-runtime": "^6.26.0",
     "hex-to-array-buffer": "^1.1.0",
     "lodash": "^4.17.10",
-    "random-bytes": "^1.0.0"
+    "random-bytes": "^1.0.0",
+    "uuid": "3.3.2"
   }
 }

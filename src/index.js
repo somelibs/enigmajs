@@ -50,5 +50,5 @@ export {
   createEncryptionKeyPair,
   importKey,
   stringToArrayBuffer,
-  arrayBufferToString
+  arrayBufferToString,
 };
