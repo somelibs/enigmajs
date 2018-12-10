@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import arrayBufferToHex from 'array-buffer-to-hex';
-import { stringToArrayBuffer, stringToInitVector } from './utils';
+import str2ab from 'string-to-arraybuffer';
+import { stringToInitVector } from './utils';
 import Random from './Random';
 
 const getCryptoKey = (key) => {
@@ -10,25 +11,22 @@ const getCryptoKey = (key) => {
 };
 
 const encrypt = async (payload, { key, raw = false }) => {
+  let settings; let
+    ivString;
   const cryptoKey = getCryptoKey(key);
-  const buffer = _.isArrayBuffer(payload) ? payload : stringToArrayBuffer(payload);
+  const buffer = _.isArrayBuffer(payload) ? payload : str2ab(encodeURI(payload));
   if (!key) throw Error('undefined key (Enigma.encrypt)');
   if (key.type === 'symmetric') {
-    const ivString = await Random.ivString();
-    const iv = stringToInitVector(ivString);
-    const settings = _.extend(key.getAlgorithm(), { iv });
-    const ciphertext = await crypto.subtle.encrypt(settings, cryptoKey, buffer);
-    return {
-      text: raw ? ciphertext : arrayBufferToHex(ciphertext),
-      iv: ivString,
-    };
-  } if (key.type === 'asymmetric') {
-    const settings = _.clone(key.getAlgorithm());
-    const ciphertext = await crypto.subtle.encrypt(settings, cryptoKey, buffer);
-    return {
-      text: raw ? ciphertext : arrayBufferToHex(ciphertext),
-    };
+    ivString = await Random.ivString();
+    settings = _.extend(key.getAlgorithm(), { iv: stringToInitVector(ivString) });
+  } else if (key.type === 'asymmetric') {
+    settings = _.clone(key.getAlgorithm());
   }
+  const ciphertext = await crypto.subtle.encrypt(settings, cryptoKey, buffer);
+  return {
+    text: raw ? ciphertext : arrayBufferToHex(ciphertext),
+    iv: ivString,
+  };
 };
 
 export default encrypt;

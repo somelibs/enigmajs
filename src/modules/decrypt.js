@@ -1,6 +1,8 @@
 import _ from 'lodash';
 import hexToArrayBuffer from 'hex-to-array-buffer';
-import { stringToInitVector, arrayBufferToString } from './utils';
+import ab2str from 'arraybuffer-to-string';
+import { stringToInitVector } from './utils';
+
 
 const getCryptoKey = (key) => {
   if (key && _.isFunction(key.toCryptoKey)) {
@@ -22,7 +24,7 @@ const decrypt = async (cipher = {}, { key, raw = false }) => {
       settings = key.getAlgorithm();
     }
     const buffer = await crypto.subtle.decrypt(settings, cryptoKey, cipherBuffer);
-    return raw ? buffer : arrayBufferToString(buffer);
+    return raw ? buffer : decodeURI(ab2str(buffer));
   }
   return null;
 };

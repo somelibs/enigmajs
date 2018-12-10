@@ -18,7 +18,6 @@ class SymmetricKey extends BaseKey {
     const settings = Settings.getAlgorithmSettings('A256GCM');
     const instance = new this(settings);
     if (passphrase && salt) {
-      const extractable = false;
       const passphraseBuffer = stringToArrayBuffer(passphrase);
       const passphraseKey = await this.import(passphraseBuffer, 'PBKDF2');
       cryptoKey = await this.derive(passphraseKey.toCryptoKey(), salt);
