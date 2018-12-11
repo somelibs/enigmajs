@@ -14,7 +14,7 @@ const encrypt = async (payload, { key, raw = false }) => {
   let settings; let
     ivString;
   const cryptoKey = getCryptoKey(key);
-  const buffer = _.isArrayBuffer(payload) ? payload : str2ab(encodeURI(payload));
+  const buffer = (_.isArrayBuffer(payload) || raw) ? payload : str2ab(encodeURI(payload));
   if (!key) throw Error('undefined key (Enigma.encrypt)');
   if (key.type === 'symmetric') {
     ivString = await Random.ivString();
