@@ -24,7 +24,8 @@ const decrypt = async (cipher = {}, { key, raw = false }) => {
       settings = key.getAlgorithm();
     }
     const buffer = await crypto.subtle.decrypt(settings, cryptoKey, cipherBuffer);
-    return raw ? buffer : decodeURI(ab2str(buffer));
+    // decodeURI?
+    return raw ? buffer : ab2str(buffer);
   }
   return null;
 };
