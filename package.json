@@ -88,6 +88,7 @@
     "lodash": "^4.17.10",
     "random-bytes": "^1.0.0",
     "string-to-arraybuffer": "^1.0.2",
+    "utf8-buffer": "^0.2.0",
     "uuid": "3.3.2"
   }
 }

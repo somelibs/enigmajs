@@ -3,7 +3,6 @@ import hexToArrayBuffer from 'hex-to-array-buffer';
 import ab2str from 'arraybuffer-to-string';
 import { stringToInitVector } from './utils';
 
-
 const getCryptoKey = (key) => {
   if (key && _.isFunction(key.toCryptoKey)) {
     return key.toCryptoKey();
@@ -24,7 +23,6 @@ const decrypt = async (cipher = {}, { key, raw = false }) => {
       settings = key.getAlgorithm();
     }
     const buffer = await crypto.subtle.decrypt(settings, cryptoKey, cipherBuffer);
-    // decodeURI?
     return raw ? buffer : ab2str(buffer);
   }
   return null;
