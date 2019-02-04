@@ -17,22 +17,32 @@ const stringToArrayBuffer = (string) => {
 };
 
 const encrypt = async (payload, { key, raw = false }) => {
-  let settings;
-  let ivString;
-  const cryptoKey = getCryptoKey(key);
-  const buffer = (_.isArrayBuffer(payload) || raw) ? payload : stringToArrayBuffer(payload);
-  if (!key) throw Error('undefined key (Enigma.encrypt)');
-  if (key.type === 'symmetric') {
-    ivString = await Random.ivString();
-    settings = _.extend(key.getAlgorithm(), { iv: stringToInitVector(ivString) });
-  } else if (key.type === 'asymmetric') {
-    settings = _.clone(key.getAlgorithm());
+  try {
+    let settings;
+    let ivString;
+    const cryptoKey = getCryptoKey(key);
+    const buffer = (_.isArrayBuffer(payload) || raw) ? payload : stringToArrayBuffer(payload);
+    if (!key) throw Error('undefined key (Enigma.encrypt)');
+    if (key.type === 'symmetric') {
+      ivString = await Random.ivString();
+      settings = _.extend(key.getAlgorithm(), { iv: stringToInitVector(ivString) });
+    } else if (key.type === 'asymmetric') {
+      settings = _.clone(key.getAlgorithm());
+    }
+    const ciphertext = await crypto.subtle.encrypt(settings, cryptoKey, buffer);
+    return {
+      text: raw ? ciphertext : arrayBufferToHex(ciphertext),
+      iv: ivString,
+    };
+  } catch (exception) {
+    const logger = console;
+    const stringifiedPayload = JSON.stringify(payload);
+    const stringifiedOptions = JSON.stringify({ key, raw });
+    logger.error('[Enigma] Unable to decrypt payload. \n',
+      +'Options: [', stringifiedOptions, ']\n',
+      +'Payload: [', stringifiedPayload, ']');
+    throw exception;
   }
-  const ciphertext = await crypto.subtle.encrypt(settings, cryptoKey, buffer);
-  return {
-    text: raw ? ciphertext : arrayBufferToHex(ciphertext),
-    iv: ivString,
-  };
 };
 
 export default encrypt;
