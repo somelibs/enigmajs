@@ -36,11 +36,9 @@ const encrypt = async (payload, { key, raw = false }) => {
     };
   } catch (exception) {
     const logger = console;
-    const stringifiedPayload = JSON.stringify(payload);
-    const stringifiedOptions = JSON.stringify({ key, raw });
-    logger.error('[Enigma] Unable to decrypt payload. \n',
-      +'Options: [', stringifiedOptions, ']\n',
-      +'Payload: [', stringifiedPayload, ']');
+    logger.groupCollapsed('%c[Enigma] Unable to encrypt payload.', 'background: #FFF0F0; color: #FD4146');
+    logger.error({ payload, key, raw });
+    logger.groupEnd();
     throw exception;
   }
 };
