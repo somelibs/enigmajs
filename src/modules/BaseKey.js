@@ -35,18 +35,20 @@ class BaseKey {
     let type;
     let keyData;
     let usages;
+    let extractable;
     if (_.isString(key) || _.isPlainObject(key)) {
       keyData = _.isString(key) ? JSON.parse(key) : key;
       settings = Settings.getAlgorithmSettings((keyData.alg ? keyData.alg : keyData.crv));
       type = 'jwk';
       usages = keyData.key_ops;
+      extractable = true;
     } else {
       keyData = key;
       settings = Settings.getAlgorithmSettings(algorithmName);
       type = 'raw';
+      extractable = false;
       ({ usages } = settings);
     }
-    const extractable = false;
     const { algorithm } = settings;
     const instance = new this(settings);
     const cryptoKey = await crypto.subtle.importKey(type, keyData, algorithm, extractable, usages);
