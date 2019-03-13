@@ -73,11 +73,11 @@
     "babel-plugin-transform-object-rest-spread": "^6.26.0",
     "babel-plugin-transform-regenerator": "^6.26.0",
     "babel-plugin-transform-runtime": "^6.23.0",
-    "eslint": "^5.1.0",
+    "eslint": "^5.15.1",
     "eslint-config-airbnb-base": "^13.0.0",
     "eslint-plugin-babel": "^5.1.0",
     "eslint-plugin-import": "^2.13.0",
-    "jest": "^23.4.1",
+    "jest": "^24.5.0",
     "rimraf": "^2.6.2"
   },
   "dependencies": {
@@ -85,7 +85,7 @@
     "arraybuffer-to-string": "^1.0.2",
     "babel-runtime": "^6.26.0",
     "hex-to-array-buffer": "^1.1.0",
-    "lodash": "^4.17.10",
+    "lodash": "^4.17.11",
     "random-bytes": "^1.0.0",
     "string-to-arraybuffer": "^1.0.2",
     "utf8-buffer": "^0.2.0",
