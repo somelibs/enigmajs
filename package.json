@@ -85,7 +85,7 @@
     "arraybuffer-to-string": "^1.0.2",
     "babel-runtime": "^6.26.0",
     "hex-to-array-buffer": "^1.1.0",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.15",
     "random-bytes": "^1.0.0",
     "string-to-arraybuffer": "^1.0.2",
     "utf8-buffer": "^0.2.0",
