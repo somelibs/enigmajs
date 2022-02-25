@@ -12,11 +12,6 @@
   "bugs": {
     "url": "https://github.com/somelibs/enigmax/issues"
   },
-  "jest": {
-    "transformIgnorePatterns": [
-      "<rootDir>/node_modules/(?!lib/)(?!src/)(?!config/)"
-    ]
-  },
   "files": [
     "dist/cjs/**",
     "dist/es/**"
