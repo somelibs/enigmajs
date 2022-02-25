@@ -51,8 +51,6 @@
     "rimraf": "^3.0.2"
   },
   "dependencies": {
-    "@babel/polyfill": "^7.11.5",
-    "@babel/runtime": "^7.11.2",
     "array-buffer-to-hex": "^1.0.0",
     "arraybuffer-to-string": "^1.0.2",
     "hex-to-array-buffer": "^2.0.0",
