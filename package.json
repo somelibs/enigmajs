@@ -34,9 +34,7 @@
     "dev": "npm run watch & npm run lint:watch",
     "lint": "eslint src/** --fix",
     "lint:watch": "nodemon -e js -x 'npm run lint'",
-    "prepare": "npm run clean && npm run build",
-    "test": "BABEL_ENV=commonjs jest",
-    "test:watch": "npm run test -- --watch"
+    "prepare": "npm run clean && npm run build"
   },
   "devDependencies": {
     "@babel/cli": "^7.17.6",
