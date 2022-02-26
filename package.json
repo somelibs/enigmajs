@@ -27,7 +27,8 @@
     "build": "yarn run build:commonjs && yarn run build:es",
     "watch": "yarn run commonjs:watch & yarn run es:watch",
     "dev": "yarn run watch & yarn run lint:watch",
-    "lint": "eslint src/** --fix",
+    "lint": "eslint src/**",
+    "lint:fix": "eslint src/** --fix",
     "lint:watch": "nodemon -e js -x 'yarn run lint'",
     "prepare": "yarn run clean && yarn run build"
   },
