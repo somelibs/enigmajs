@@ -1,15 +1,24 @@
-
 {
+  "presets": [
+    [
+      "@babel/preset-env", {
+        useBuiltIns: "usage",
+        corejs: 3,
+      }
+    ]
+  ],
   "plugins": [
-    [ "inline-replace-variables", 
-      {
+    "@babel/plugin-proposal-class-properties",
+    "@babel/plugin-proposal-export-default-from",
+    "@babel/plugin-transform-modules-commonjs",
+    [
+      "inline-replace-variables", {
         "__DEV__": {
           "type": "node",
           "replacement": "process.env.NODE_ENV !== 'production'"
         }
       }
     ],
-    "@babel/plugin-proposal-export-default-from"
   ],
   "env": {
     "commonjs": {

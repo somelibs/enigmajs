@@ -22,14 +22,14 @@
     "clean": "rimraf dist",
     "build:commonjs": "BABEL_ENV=commonjs babel src --out-dir dist/cjs",
     "build:es": "BABEL_ENV=es babel src --out-dir dist/es",
-    "commonjs:watch": "npm run build:commonjs -- --watch",
-    "es:watch": "npm run build:es -- --watch",
-    "build": "npm run build:commonjs && npm run build:es",
-    "watch": "npm run commonjs:watch & npm run es:watch",
-    "dev": "npm run watch & npm run lint:watch",
+    "commonjs:watch": "yarn run build:commonjs -- --watch",
+    "es:watch": "yarn run build:es -- --watch",
+    "build": "yarn run build:commonjs && yarn run build:es",
+    "watch": "yarn run commonjs:watch & yarn run es:watch",
+    "dev": "yarn run watch & yarn run lint:watch",
     "lint": "eslint src/** --fix",
-    "lint:watch": "nodemon -e js -x 'npm run lint'",
-    "prepare": "npm run clean && npm run build"
+    "lint:watch": "nodemon -e js -x 'yarn run lint'",
+    "prepare": "yarn run clean && yarn run build"
   },
   "devDependencies": {
     "@babel/cli": "^7.17.6",
@@ -46,9 +46,11 @@
   "dependencies": {
     "array-buffer-to-hex": "^1.0.0",
     "arraybuffer-to-string": "^1.0.2",
+    "core-js": "^3.21.1",
     "hex-to-array-buffer": "^2.0.0",
     "lodash": "^4.17.15",
     "random-bytes": "^1.0.0",
+    "regenerator-runtime": "^0.13.9",
     "string-to-arraybuffer": "^1.0.2",
     "utf8-buffer": "^0.2.0",
     "uuid": "^8.3.2"
