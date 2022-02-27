@@ -13,8 +13,8 @@ import sign from './crypto/sign';
 
 /* ------------------ Wrappers ------------------ */
 
-import SymmetricKey from './base/SymmetricKey';
-import AsymmetricKey from './base/AsymmetricKey';
+import SymmetricKey from './core/SymmetricKey';
+import AsymmetricKey from './core/AsymmetricKey';
 
 /* ------------------- Exports ------------------ */
 
