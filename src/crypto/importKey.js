@@ -1,8 +1,8 @@
 import _ from 'lodash';
 import getAlgorithm from '../utils/getAlgorithm';
-import Settings from '../base/Settings';
-import SymmetricKey from '../base/SymmetricKey';
-import AsymmetricKey from '../base/AsymmetricKey';
+import Settings from '../core/Settings';
+import SymmetricKey from '../core/SymmetricKey';
+import AsymmetricKey from '../core/AsymmetricKey';
 
 export default importKey = (jwk) => {
   const jsonJwk = _.isString(jwk) ? JSON.parse(jwk) : jwk;

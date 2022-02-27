@@ -2,7 +2,7 @@ import _ from 'lodash';
 import { pack } from 'utf8-buffer';
 import arrayBufferToHex from 'array-buffer-to-hex';
 import stringToInitVector from '../utils/stringToInitVector';
-import Random from '../wrappers/Random';
+import Random from '../core/Random';
 
 const getCryptoKey = (key) => {
   if (key && _.isFunction(key.toCryptoKey)) {

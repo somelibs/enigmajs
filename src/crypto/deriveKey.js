@@ -1,4 +1,4 @@
-import SymmetricKey from '../base/SymmetricKey';
+import SymmetricKey from '../core/SymmetricKey';
 
 export default deriveKey = ({ passphrase, salt }) => SymmetricKey.generate({
   passphrase,
