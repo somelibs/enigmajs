@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import hexToArrayBuffer from 'hex-to-array-buffer';
 import ab2str from 'arraybuffer-to-string';
-import { stringToInitVector } from './utils';
+import stringToInitVector from '../utils/stringToInitVector';
 
 const getCryptoKey = (key) => {
   if (key && _.isFunction(key.toCryptoKey)) {

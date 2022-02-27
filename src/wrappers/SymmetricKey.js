@@ -1,6 +1,7 @@
+import stringToArrayBuffer from '../utils/stringToArrayBuffer';
+import stringToInitVector from '../utils/stringToInitVector';
 import Settings from './Settings';
 import BaseKey from './BaseKey';
-import { stringToInitVector, stringToArrayBuffer } from './utils';
 
 class SymmetricKey extends BaseKey {
 

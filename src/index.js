@@ -1,42 +1,22 @@
-import _ from 'lodash';
-import arrayBufferToHex from 'array-buffer-to-hex';
+/* ------------------- Utils ------------------- */
 
-import SymmetricKey from './modules/SymmetricKey';
-import AsymmetricKey from './modules/AsymmetricKey';
-import Settings from './modules/Settings';
-import { stringToArrayBuffer, getAlgorithm } from './modules/utils';
+import stringToArrayBuffer from './utils/stringToArrayBuffer';
 
-const sign = async (payload, { key }) => {
-  const cryptoKey = key.toCryptoKey(key);
-  const buffer = stringToArrayBuffer(payload);
-  const settings = key.getAlgorithm();
-  const encryptedPayload = await crypto.subtle.sign(settings, cryptoKey, buffer);
-  return arrayBufferToHex(new Uint8Array(encryptedPayload));
-};
+/* ------------------- Crypto ------------------- */
 
-const deriveKey = ({ passphrase, salt }) => SymmetricKey.generate({
-  passphrase,
-  salt,
-});
+import createEncryptionKeyPair from './crypto/createEncryptionKeyPair';
+import createSignatureKeyPair from './crypto/createSignatureKeyPair';
+import createSecret from './crypto/createSecret';
+import deriveKey from './crypto/deriveKey';
+import importKey from './crypto/importKey';
+import sign from './crypto/sign';
 
-const createSecret = () => SymmetricKey.generate();
+/* ------------------ Wrappers ------------------ */
 
-const createSignatureKeyPair = () => AsymmetricKey.generate('SIGN_VERIFY');
+import SymmetricKey from './base/SymmetricKey';
+import AsymmetricKey from './base/AsymmetricKey';
 
-const createEncryptionKeyPair = () => AsymmetricKey.generate('ENCRYPT_DECRYPT');
-
-const importKey = (jwk) => {
-  const jsonJwk = _.isString(jwk) ? JSON.parse(jwk) : jwk;
-  const algorithm = getAlgorithm(jsonJwk);
-  const settings = Settings.getAlgorithmSettings(algorithm);
-  if (algorithm) {
-    if (settings.type === 'symmetric') {
-      return SymmetricKey.import(jsonJwk);
-    } if (settings.type === 'asymmetric') {
-      return AsymmetricKey.import(jsonJwk);
-    }
-  }
-};
+/* ------------------- Exports ------------------ */
 
 export encrypt from './modules/encrypt';
 export decrypt from './modules/decrypt';
