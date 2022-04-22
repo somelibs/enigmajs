@@ -1,3 +1,5 @@
 import SymmetricKey from '../core/SymmetricKey';
 
-export default createSecret = () => SymmetricKey.generate();
+export default function createSecret() {
+  return SymmetricKey.generate();
+}

@@ -4,7 +4,7 @@ import Settings from '../core/Settings';
 import SymmetricKey from '../core/SymmetricKey';
 import AsymmetricKey from '../core/AsymmetricKey';
 
-export default importKey = (jwk) => {
+export default function importKey(jwk) {
   const jsonJwk = _.isString(jwk) ? JSON.parse(jwk) : jwk;
   const algorithm = getAlgorithm(jsonJwk);
   const settings = Settings.getAlgorithmSettings(algorithm);
@@ -15,4 +15,4 @@ export default importKey = (jwk) => {
       return AsymmetricKey.import(jsonJwk);
     }
   }
-};
+}
