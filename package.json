@@ -1,5 +1,5 @@
 {
-  "name": "enigma",
+  "name": "enigmax",
   "version": "1.0.0",
   "description": "Enigma Cryptographic Library",
   "author": "The Bernstein Team",
@@ -7,11 +7,11 @@
   "private": true,
   "repository": {
     "type": "git",
-    "url": "https://github.com/bernstein-io/client.git"
+    "url": "https://github.com/somelibs/enigmax.git"
   },
-  "homepage": "https://github.com/bernstein-io/client#readme",
+  "homepage": "https://github.com/somelibs/enigmax#readme",
   "bugs": {
-    "url": "https://github.com/bernstein-io/client/issues"
+    "url": "https://github.com/somelibs/enigmax/issues"
   },
   "jest": {
     "transformIgnorePatterns": [
