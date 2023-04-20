@@ -1,27 +1,38 @@
-import _classCallCheck from 'babel-runtime/helpers/classCallCheck';
+"use strict";
 
-var Settings = function () {
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports["default"] = void 0;
+var _classCallCheck2 = _interopRequireDefault(require("@babel/runtime/helpers/classCallCheck"));
+var _createClass2 = _interopRequireDefault(require("@babel/runtime/helpers/createClass"));
+var _defineProperty2 = _interopRequireDefault(require("@babel/runtime/helpers/defineProperty"));
+var Settings = /*#__PURE__*/function () {
   function Settings() {
-    _classCallCheck(this, Settings);
+    (0, _classCallCheck2["default"])(this, Settings);
   }
-
-  Settings.getAlgorithmSettings = function getAlgorithmSettings(algorithm) {
-    if (algorithm === 'A256GCM') {
-      return this.options.aesGcm;
-    }if (algorithm === 'RSA-OAEP') {
-      return this.options.rsaOaep;
-    }if (algorithm === 'ECDSA' || algorithm === 'P-384') {
-      return this.options.ecdsa;
-    }if (algorithm === 'PBKDF2') {
-      return this.options.pbkdf2;
+  (0, _createClass2["default"])(Settings, null, [{
+    key: "getAlgorithmSettings",
+    value: function getAlgorithmSettings(algorithm) {
+      if (algorithm === 'A256GCM') {
+        return this.options.aesGcm;
+      }
+      if (algorithm === 'RSA-OAEP') {
+        return this.options.rsaOaep;
+      }
+      if (algorithm === 'ECDSA' || algorithm === 'P-384') {
+        return this.options.ecdsa;
+      }
+      if (algorithm === 'PBKDF2') {
+        return this.options.pbkdf2;
+      }
+      return {};
     }
-    return {};
-  };
-
+  }]);
   return Settings;
 }();
-
-Settings.options = {
+(0, _defineProperty2["default"])(Settings, "options", {
   aesGcm: {
     type: 'symmetric',
     usages: ['encrypt', 'decrypt'],
@@ -40,7 +51,9 @@ Settings.options = {
       name: 'RSA-OAEP',
       modulusLength: 4096,
       publicExponent: new Uint8Array([0x01, 0x00, 0x01]),
-      hash: { name: 'SHA-1' }
+      hash: {
+        name: 'SHA-1'
+      }
     }
   },
   ecdsa: {
@@ -49,7 +62,9 @@ Settings.options = {
     algorithm: {
       name: 'ECDSA',
       namedCurve: 'P-384',
-      hash: { name: 'SHA-256' }
+      hash: {
+        name: 'SHA-256'
+      }
     }
   },
   pbkdf2: {
@@ -61,7 +76,6 @@ Settings.options = {
       hash: 'SHA-256'
     }
   }
-};
-
-
-export default Settings;
+});
+var _default = Settings;
+exports["default"] = _default;

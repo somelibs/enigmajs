@@ -1,87 +1,105 @@
-import _regeneratorRuntime from 'babel-runtime/regenerator';
-import _asyncToGenerator from 'babel-runtime/helpers/asyncToGenerator';
-import _isString from 'lodash/isString';
+"use strict";
 
-var _this = this;
-
-import arrayBufferToHex from 'array-buffer-to-hex';
-
-import SymmetricKey from './modules/SymmetricKey';
-import AsymmetricKey from './modules/AsymmetricKey';
-import Settings from './modules/Settings';
-import { stringToArrayBuffer, getAlgorithm } from './modules/utils';
-
-var sign = function () {
-  var _ref2 = _asyncToGenerator( /*#__PURE__*/_regeneratorRuntime.mark(function _callee(payload, _ref) {
-    var key = _ref.key;
-    var cryptoKey, buffer, settings, encryptedPayload;
-    return _regeneratorRuntime.wrap(function _callee$(_context) {
-      while (1) {
-        switch (_context.prev = _context.next) {
-          case 0:
-            cryptoKey = key.toCryptoKey(key);
-            buffer = stringToArrayBuffer(payload);
-            settings = key.getAlgorithm();
-            _context.next = 5;
-            return crypto.subtle.sign(settings, cryptoKey, buffer);
-
-          case 5:
-            encryptedPayload = _context.sent;
-            return _context.abrupt('return', arrayBufferToHex(new Uint8Array(encryptedPayload)));
-
-          case 7:
-          case 'end':
-            return _context.stop();
-        }
+var _interopRequireDefault = require("@babel/runtime/helpers/interopRequireDefault");
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+Object.defineProperty(exports, "Random", {
+  enumerable: true,
+  get: function get() {
+    return _Random["default"];
+  }
+});
+exports.createSignatureKeyPair = exports.createSecret = exports.createEncryptionKeyPair = void 0;
+Object.defineProperty(exports, "decrypt", {
+  enumerable: true,
+  get: function get() {
+    return _decrypt["default"];
+  }
+});
+exports.deriveKey = void 0;
+Object.defineProperty(exports, "encrypt", {
+  enumerable: true,
+  get: function get() {
+    return _encrypt["default"];
+  }
+});
+exports.sign = exports.importKey = void 0;
+Object.defineProperty(exports, "stringToArrayBuffer", {
+  enumerable: true,
+  get: function get() {
+    return _utils.stringToArrayBuffer;
+  }
+});
+var _regenerator = _interopRequireDefault(require("@babel/runtime/regenerator"));
+var _asyncToGenerator2 = _interopRequireDefault(require("@babel/runtime/helpers/asyncToGenerator"));
+var _isString2 = _interopRequireDefault(require("lodash/isString"));
+var _arrayBufferToHex = _interopRequireDefault(require("array-buffer-to-hex"));
+var _SymmetricKey = _interopRequireDefault(require("./modules/SymmetricKey"));
+var _AsymmetricKey = _interopRequireDefault(require("./modules/AsymmetricKey"));
+var _Settings = _interopRequireDefault(require("./modules/Settings"));
+var _utils = require("./modules/utils");
+var _encrypt = _interopRequireDefault(require("./modules/encrypt"));
+var _decrypt = _interopRequireDefault(require("./modules/decrypt"));
+var _Random = _interopRequireDefault(require("./modules/Random"));
+var sign = /*#__PURE__*/function () {
+  var _ref2 = (0, _asyncToGenerator2["default"])( /*#__PURE__*/_regenerator["default"].mark(function _callee(payload, _ref) {
+    var key, cryptoKey, buffer, settings, encryptedPayload;
+    return _regenerator["default"].wrap(function _callee$(_context) {
+      while (1) switch (_context.prev = _context.next) {
+        case 0:
+          key = _ref.key;
+          cryptoKey = key.toCryptoKey(key);
+          buffer = (0, _utils.stringToArrayBuffer)(payload);
+          settings = key.getAlgorithm();
+          _context.next = 6;
+          return crypto.subtle.sign(settings, cryptoKey, buffer);
+        case 6:
+          encryptedPayload = _context.sent;
+          return _context.abrupt("return", (0, _arrayBufferToHex["default"])(new Uint8Array(encryptedPayload)));
+        case 8:
+        case "end":
+          return _context.stop();
       }
-    }, _callee, _this);
+    }, _callee);
   }));
-
   return function sign(_x, _x2) {
     return _ref2.apply(this, arguments);
   };
 }();
-
+exports.sign = sign;
 var deriveKey = function deriveKey(_ref3) {
   var passphrase = _ref3.passphrase,
-      salt = _ref3.salt;
-  return SymmetricKey.generate({
+    salt = _ref3.salt;
+  return _SymmetricKey["default"].generate({
     passphrase: passphrase,
     salt: salt
   });
 };
-
+exports.deriveKey = deriveKey;
 var createSecret = function createSecret() {
-  return SymmetricKey.generate();
+  return _SymmetricKey["default"].generate();
 };
-
+exports.createSecret = createSecret;
 var createSignatureKeyPair = function createSignatureKeyPair() {
-  return AsymmetricKey.generate('SIGN_VERIFY');
+  return _AsymmetricKey["default"].generate('SIGN_VERIFY');
 };
-
+exports.createSignatureKeyPair = createSignatureKeyPair;
 var createEncryptionKeyPair = function createEncryptionKeyPair() {
-  return AsymmetricKey.generate('ENCRYPT_DECRYPT');
+  return _AsymmetricKey["default"].generate('ENCRYPT_DECRYPT');
 };
-
+exports.createEncryptionKeyPair = createEncryptionKeyPair;
 var importKey = function importKey(jwk) {
-  var jsonJwk = _isString(jwk) ? JSON.parse(jwk) : jwk;
-  var algorithm = getAlgorithm(jsonJwk);
-  var settings = Settings.getAlgorithmSettings(algorithm);
+  var jsonJwk = (0, _isString2["default"])(jwk) ? JSON.parse(jwk) : jwk;
+  var algorithm = (0, _utils.getAlgorithm)(jsonJwk);
+  var settings = _Settings["default"].getAlgorithmSettings(algorithm);
   if (algorithm) {
     if (settings.type === 'symmetric') {
-      return SymmetricKey.import(jsonJwk);
-    }if (settings.type === 'asymmetric') {
-      return AsymmetricKey.import(jsonJwk);
+      return _SymmetricKey["default"]["import"](jsonJwk);
+    }
+    if (settings.type === 'asymmetric') {
+      return _AsymmetricKey["default"]["import"](jsonJwk);
     }
   }
 };
-
-import _encrypt from './modules/encrypt';
-export { _encrypt as encrypt };
-import _decrypt from './modules/decrypt';
-export { _decrypt as decrypt };
-import _Random from './modules/Random';
-export { _Random as Random };
-
-
-export { sign, deriveKey, createSecret, createSignatureKeyPair, createEncryptionKeyPair, importKey, stringToArrayBuffer };
+exports.importKey = importKey;
