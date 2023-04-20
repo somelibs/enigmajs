@@ -11,7 +11,7 @@ var _isPlainObject2 = _interopRequireDefault(require("lodash/isPlainObject"));
 var _isString2 = _interopRequireDefault(require("lodash/isString"));
 var _extend2 = _interopRequireDefault(require("lodash/extend"));
 var _clone2 = _interopRequireDefault(require("lodash/clone"));
-var _uuid = _interopRequireDefault(require("uuid"));
+var _uuid = require("uuid");
 var _Settings = _interopRequireDefault(require("./Settings"));
 var BaseKey = /*#__PURE__*/function () {
   function BaseKey() {
@@ -19,7 +19,7 @@ var BaseKey = /*#__PURE__*/function () {
       type = _ref.type,
       algorithm = _ref.algorithm;
     (0, _classCallCheck2["default"])(this, BaseKey);
-    this.uuid = (0, _uuid["default"])();
+    this.uuid = (0, _uuid.v4)();
     this.type = type;
     this.algorithm = algorithm;
   }
